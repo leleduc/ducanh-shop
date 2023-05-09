@@ -1,3 +1,4 @@
+<?php
 /*
 * Plugin Name: Duc Anh Shop
 * Plugin URI: #
@@ -13,3 +14,38 @@
 * Text Domain: ducanh-shop
 * Domain Path: /languages
 */
+
+//Declare constance for plugin
+define('DUCANH_SHOP_PATH', plugin_dir_path(__FILE__));
+define('DUCANH_SHOP_URI', plugin_dir_url(__FILE__));
+
+// echo '<br>' . DUCANH_SHOP_PATH;
+// echo '<br>' . DUCANH_SHOP_URI;
+
+//Action when pluging activation
+register_activation_hook(__FILE__, 'ducanh_shop_activation');
+function ducanh_shop_activation()
+{
+    //Test
+    // echo __FILE__;
+    // die();
+
+    //Create database
+
+
+    //Create sample database data
+}
+
+//Action when pluging deactivation
+register_deactivation_hook(__FILE__, 'ducanh_shop_deactivation');
+function ducanh_shop_deactivation()
+{
+
+    // Unregister the post type, so the rules are no longer in memory.
+
+    // Clear the permalinks to remove our post type's rules from the database.
+
+
+}
+
+include_once DUCANH_SHOP_PATH . 'includes/includes.php';
