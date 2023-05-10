@@ -17,7 +17,7 @@ if (!function_exists('ducanh_add_product_meta_box')) {
 if (!function_exists('ducanh_product_meta_box_html')) {
     function ducanh_product_meta_box_html()
     {
-        include_once DUCANH_SHOP_PATH . 'includes/templates/meta-boxes-product.php';
+        include_once DUCANH_SHOP_PATH . 'includes/templates/product-add-meta-boxes.php';
     }
 }
 
@@ -39,5 +39,37 @@ if (!function_exists('ducanh_save_product_meta_data')) {
             update_post_meta($post_id, 'product_price_sales', $product_price_sales);
             update_post_meta($post_id, 'product_stock', $product_stock);
         }
+    }
+}
+
+
+//Register Taxonomy metaboxs
+
+//Register metaboxs form for Taxonomy  (Fires after the Add Term form fields.)
+add_action('product_cat_add_form_fields', 'ducanh_product_cat_add_form_fields');
+if (!function_exists('ducanh_product_cat_add_form_fields')) {
+    function ducanh_product_cat_add_form_fields()
+    {
+        include_once DUCANH_SHOP_PATH . 'includes/templates/product-cat-add-form-fields.php';
+    }
+}
+
+//Edit metaboxs form for Taxonomy   (Fires after the Edit Term form fields are displayed.)
+add_action('product_cat_edit_form_fields', 'ducanh_product_cat_edit_form_fields', 10, 2);
+if (!function_exists('ducanh_product_cat_edit_form_fields')) {
+    function ducanh_product_cat_edit_form_fields($tag, $taxonomy)
+    {
+        include_once DUCANH_SHOP_PATH . 'includes/templates/product-cat-edit-form-fields.php';
+    }
+}
+
+//Create or save taxonomy meta after input.
+add_action('create_product_cat', 'ducanh_product_cat_meta_box_save');
+add_action('edit_product_cat', 'ducanh_product_cat_meta_box_save');
+if (!function_exists('ducanh_product_cat_meta_box_save')) {
+    function ducanh_product_cat_meta_box_save($term_id)
+    {
+        $image = $_POST['image'];
+        update_term_meta($term_id, 'image', $image);
     }
 }
