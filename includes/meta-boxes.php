@@ -26,9 +26,7 @@ add_action('save_post', 'ducanh_save_product_meta_data');
 if (!function_exists('ducanh_save_product_meta_data')) {
     function ducanh_save_product_meta_data($post_id)
     {
-        // echo '<pre>';
-        // print_r($_REQUEST);
-        // wp_die();
+
         if ($_REQUEST['post_type'] == 'product') {
             $product_price = $_REQUEST['product-price'];
             $product_price_sales = $_REQUEST['product-price-sales'];
