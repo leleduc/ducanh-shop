@@ -6,24 +6,47 @@ class ducanhOrder
     {
         global $wpdb;
         $this->_orders = $wpdb->prefix . 'da_orders'; //pkoto_da_orders
+
+        // echo '<pre>';
+        // print_r($this->_orders);
+        // wp_die();
     }
 
     public function all()
     {
         global $wpdb;
-        $sql = 'SELECT * FROM $this->_orders';
+        $sql = "SELECT * FROM $this->_orders";
         $items = $wpdb->get_results($sql);
         return $items;
     }
 
     // Get total display page
-    public function panigate($limit = 20, $paged = 1)
+    public function panigate($limit = 20)
     {
         global $wpdb;
 
+        $paged = isset($_REQUEST['paged']) ? $_REQUEST['paged'] : 1;
+
+        // pr($_REQUEST);
+
+        $s = isset($_REQUEST['s']) ? $_REQUEST['s'] : '';
+        $status = isset($_REQUEST['status']) ? $_REQUEST['status'] : '';
+
+
+
         //Get total record
-        $sql = 'SELECT count(id) FROM $this->_orders';
-        $total_items = $wpdb->get_results($sql);
+        $sql = "SELECT count(id) FROM $this->_orders WHERE deleted=0 ";
+
+        //do search
+        if ($s) {
+            $sql .= " AND (customer_name LIKE '%$s%' OR customer_phone LIKE '%$s%' )";
+        }
+        //check status    
+        if ($status) {
+            $sql .= " AND status = '$status' ";
+        }
+
+        $total_items = $wpdb->get_var($sql);
 
         //Thuật toán phân trang
         /*
@@ -34,12 +57,26 @@ class ducanhOrder
         $total_pages = ceil($total_items / $limit);
         $offset = ($paged * $limit) - $limit;
 
-        $sql = 'SELECT * FROM $this->_orders';
-        $sql .= 'ORDER BY id DESC';
-        $sql .= 'LIMIT $limit OFFSET $offset';
+        $sql = "SELECT * FROM $this->_orders WHERE deleted=0 ";
+        //do search
+        if ($s) {
+            $sql .= " AND (customer_name LIKE  '%$s%' OR customer_phone LIKE '%$s%' )";
+        }
+        //check status    
+        if ($status) {
+            $sql .= " AND status = '$status' ";
+        }
+        $sql .= " ORDER BY id DESC";
+        $sql .= " LIMIT $limit OFFSET $offset";
 
-        $item = $wpdb->get_results($sql);
-        return $item;
+        // var_dump($sql);     //test sql string
+
+        $items = $wpdb->get_results($sql);
+        return [
+            'total_pages'   => $total_pages,
+            'total_items'   => $total_items,
+            'items'         => $items
+        ];
     }
 
     //find function
@@ -74,6 +111,23 @@ class ducanhOrder
         return true;
     }
 
+    //trash function - move one oder to trash
+    public function trash($id)
+    {
+        global $wpdb;
+        $wpdb->update(
+            $this->_orders,
+            [
+                'deleted' => 1
+            ],
+            [
+                'id' => $id
+            ]
+        );
+
+        return true;
+    }
+
     //delete an order function
     public function destroy($id)
     {
@@ -81,6 +135,23 @@ class ducanhOrder
         $wpdb->delete($this->_orders,  [
             'id' => $id
         ]);
+
+        return true;
+    }
+
+    //update status order function
+    public function change_status($id, $status)
+    {
+        global $wpdb;
+        $wpdb->update(
+            $this->_orders,
+            [
+                'status' => $status
+            ],
+            [
+                'id' => $id
+            ]
+        );
 
         return true;
     }

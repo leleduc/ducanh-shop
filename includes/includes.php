@@ -1,4 +1,7 @@
 <?php
+//Include function.php
+include_once DUCANH_SHOP_PATH . 'includes/function.php';
+
 //Register post_types 
 include_once DUCANH_SHOP_PATH . 'includes/post-types.php';
 
@@ -16,3 +19,6 @@ include_once DUCANH_SHOP_PATH . 'includes/admin-menus.php';
 
 //Include oder class
 include_once DUCANH_SHOP_PATH . 'includes/classes/ducanhOrder.php';
+
+//Include ajax
+include_once DUCANH_SHOP_PATH . 'includes/admin-ajaxs.php';

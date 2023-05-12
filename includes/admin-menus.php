@@ -9,7 +9,7 @@ if (!function_exists('ducanh_admin_menu')) {
             __('Duc Anh Shop', 'ducanh-shop'),  //$page_title
             __('Duc Anh Shop', 'ducanh-shop'),  //$menu_title
             'manage_options',                   //$capability,
-            'ducanh-admin',                     //$menu_slug
+            'ducanh-admin',                            //$menu_slug
             'ducanh_admin_page_dashboard',      //$callback
             'dashicons-store',                  //$icon_url
             25                                  //$position
@@ -21,8 +21,8 @@ if (!function_exists('ducanh_admin_menu')) {
             __('Đơn hàng', 'ducanh-shop'),  //$page_title
             __('Đơn hàng', 'ducanh-shop'),  //$menu_title  
             'manage_options',               //$capability
-            'ducanh-order',                 //$menu_slug
-            'ducanh_admin_page_order',      //$callback
+            'ducanh-orders',                       //$menu_slug
+            'ducanh_admin_page_orders',      //$callback
             26                      //$position  
 
         );
@@ -41,7 +41,7 @@ if (!function_exists('ducanh_admin_menu')) {
     }
 }
 if (!function_exists('ducanh_admin_page_order')) {
-    function ducanh_admin_page_order()
+    function ducanh_admin_page_orders()
     {
         include_once DUCANH_SHOP_PATH . 'includes/admin-pages/orders.php';
     }
