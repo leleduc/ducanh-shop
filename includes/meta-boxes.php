@@ -28,14 +28,21 @@ if (!function_exists('ducanh_save_product_meta_data')) {
     {
 
         if ($_REQUEST['post_type'] == 'product') {
-            $product_price = $_REQUEST['product-price'];
-            $product_price_sales = $_REQUEST['product-price-sales'];
-            $product_stock = $_REQUEST['product-stock'];
+            if (isset($_REQUEST['product-price'])) {
+                $product_price = $_REQUEST['product-price'];
+                //Save to database
+                update_post_meta($post_id, 'product_price', $product_price);
+            }
 
-            //Save to database
-            update_post_meta($post_id, 'product_price', $product_price);
-            update_post_meta($post_id, 'product_price_sales', $product_price_sales);
-            update_post_meta($post_id, 'product_stock', $product_stock);
+            if (isset($_REQUEST['product-price-sales'])) {
+                $product_price_sales = $_REQUEST['product-price-sales'];
+                update_post_meta($post_id, 'product_price_sales', $product_price_sales);
+            }
+
+            if (isset($_REQUEST['product-stock'])) {
+                $product_stock = $_REQUEST['product-stock'];
+                update_post_meta($post_id, 'product_stock', $product_stock);
+            }
         }
     }
 }
