@@ -1,8 +1,10 @@
 <?php
+
 $paged = isset($_REQUEST['paged']) && ($_REQUEST['paged'] > 1) && ($_REQUEST['paged'] <= $total_pages) ? $_REQUEST['paged'] : 1;
 ?>
 
-<div class="tablenav-pages"><span class="displaying-num"><?php echo $total_items; ?><?php echo __(' mục', 'ducanh-shop'); ?></span>
+<div class="tablenav-pages">
+    <span class="displaying-num"><?php echo $total_items; ?><?php echo __(' mục', 'ducanh-shop'); ?></span>
     <span class="pagination-links">
         <?php if ($paged > 1) : ?>
             <a class="first-page button" href="http://localhost/phukienoto/wp-admin/edit.php">

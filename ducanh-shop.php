@@ -3,7 +3,7 @@
 * Plugin Name: Duc Anh Shop
 * Plugin URI: #
 * Description: Duc Anh Shop Plugin.
-* Version: 1.10.3
+* Version: 1.0.1
 * Requires at least: 5.2
 * Requires PHP: 7.2
 * Author: Duc Anh

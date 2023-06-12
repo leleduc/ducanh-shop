@@ -15,6 +15,7 @@ extract($result);
 */
 
 $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : '';
+
 if ($action == 2) {                 //Bo vao thung rac
     $orderIds = $_REQUEST['post'];
     if ($orderIds) {
@@ -23,7 +24,7 @@ if ($action == 2) {                 //Bo vao thung rac
         }
     }
 
-    ducanh_redirect("admin.php?page=ducanh-orders");
+    ducanh_redirect("admin.php?page=music-artist");
     exit();
 }
 

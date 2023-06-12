@@ -7,13 +7,13 @@ if (!function_exists('ducanh_shop_custom_post_type')) {
             'product',
             array(
                 'labels'      => array(
-                    'name'          => __('Các sản phẩm', 'ducanh-shop'),
-                    'singular_name' => __('Sản phẩm', 'ducanh-shop'),
+                    'name'          => __('Products', 'ducanh-shop'),
+                    'singular_name' => __('Product', 'ducanh-shop'),
                 ),
                 'public'      => true,
                 'has_archive' => true,
                 'menu_icon'   => 'dashicons-products',
-                'rewrite'     => array('slug' => 'products'), // my custom slug
+                'rewrite'     => array('slug' => 'product'), // my custom slug
                 'susupports'  => array('title', 'editor', 'excerpt', 'thumbnail',),
             )
         );
@@ -21,5 +21,3 @@ if (!function_exists('ducanh_shop_custom_post_type')) {
 }
 
 add_action('init', 'ducanh_shop_custom_post_type');
-
-
